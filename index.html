@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assessment Login Form</title>
+    <link rel="icon" type="image/x-icon" href="LoginImg-Dont-Open/sfl.jpg" />
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+
+    <script>
+      const userOptions = {
+        q1: [],
+        q2: [],
+        q3: [],
+        q4: [],
+        q5: [],
+        q6: [],
+        q7: [],
+        q8: [],
+        q9: [],
+        q10: [],
+        // add more questions as needed
+      };
+
+      const userAnswer = {
+        a1: [],
+        a2: [],
+        a3: [],
+        a4: [],
+        a5: [],
+        a6: [],
+        a7: [],
+        a8: [],
+        a9: [],
+        a10: [],
+      };
+
+      // Retrieve saved options from localStorage on page load
+      const storedOptions = JSON.parse(localStorage.getItem("userOptions"));
+      if (storedOptions) {
+        userOptions.q1 = storedOptions.q1;
+        userOptions.q2 = storedOptions.q2;
+        userOptions.q3 = storedOptions.q3;
+        userOptions.q4 = storedOptions.q4;
+        userOptions.q5 = storedOptions.q5;
+        userOptions.q6 = storedOptions.q6;
+        userOptions.q7 = storedOptions.q7;
+        userOptions.q8 = storedOptions.q8;
+        userOptions.q9 = storedOptions.q9;
+        userOptions.q10 = storedOptions.q10;
+        // add more questions as needed
+      }
+
+      const storedAnswer = JSON.parse(localStorage.getItem("userAnswer"));
+      if (storedAnswer) {
+        userAnswer.a1 = storedAnswer.a1;
+        userAnswer.a2 = storedAnswer.a2;
+        userAnswer.a3 = storedAnswer.a3;
+        userAnswer.a4 = storedAnswer.a4;
+        userAnswer.a5 = storedAnswer.a5;
+        userAnswer.a6 = storedAnswer.a6;
+        userAnswer.a7 = storedAnswer.a7;
+        userAnswer.a8 = storedAnswer.a8;
+        userAnswer.a9 = storedAnswer.a9;
+        userAnswer.a10 = storedAnswer.a10;
+      }
+
+      const quizData = [
+        {
+          question:
+            "<img src='Defect_Photos/q1.jpg' style='height: 400px' '></img>",
+          value: "q1",
+          options: userOptions.q1,
+          answer: userAnswer.a1,
+        },
+        {
+          question:
+            "<img src='Defect_Photos/q2.jpg' style='height: 400px' '> </img>",
+          value: "q2",
+          options: userOptions.q2,
+          answer: userAnswer.a2,
+        },
+        {
+          question:
+            "<img src='Defect_Photos/q3.jpg' style='height: 400px' '> </img>",
+          value: "q3",
+          options: userOptions.q3,
+          answer: userAnswer.a3,
+        },
+        {
+          question:
+            "<img src='Defect_Photos/q4.jpg' style='height: 400px' '> </img>",
+          value: "q4",
+          options: userOptions.q4,
+          answer: userAnswer.a4,
+        },
+        {
+          question:
+            "<img src='Defect_Photos/q5.jpg' style='height: 400px' '> </img>",
+          value: "q5",
+          options: userOptions.q5,
+          answer: userAnswer.a5,
+        },
+        {
+          question:
+            "<img src='Defect_Photos/q6.jpg' style='height: 400px' '> </img>",
+          value: "q6",
+          options: userOptions.q6,
+          answer: userAnswer.a6,
+        },
+        {
+          question:
+            "<img src='Defect_Photos/q7.jpg' style='height: 400px' '> </img>",
+          value: "q7",
+          options: userOptions.q7,
+          answer: userAnswer.a7,
+        },
+        {
+          question:
+            "<img src='Defect_Photos/q8.jpg' style='height: 400px' '> </img>",
+          value: "q8",
+          options: userOptions.q8,
+          answer: userAnswer.a8,
+        },
+        {
+          question:
+            "<img src='Defect_Photos/q9.jpg' style='height: 400px' '> </img>",
+          value: "q9",
+          options: userOptions.q9,
+          answer: userAnswer.a9,
+        },
+        {
+          question:
+            "<img src='Defect_Photos/q10.jpg' style='height: 400px' '> </img>",
+          value: "q10",
+          options: userOptions.q10,
+          answer: userAnswer.a10,
+        },
+      ];
+
+      function saveOptions() {
+        const q1OptionsInput = document.getElementById("q1Options");
+        const q2OptionsInput = document.getElementById("q2Options");
+        const q3OptionsInput = document.getElementById("q3Options");
+        const q4OptionsInput = document.getElementById("q4Options");
+        const q5OptionsInput = document.getElementById("q5Options");
+        const q6OptionsInput = document.getElementById("q6Options");
+        const q7OptionsInput = document.getElementById("q7Options");
+        const q8OptionsInput = document.getElementById("q8Options");
+        const q9OptionsInput = document.getElementById("q9Options");
+        const q10OptionsInput = document.getElementById("q10Options");
+
+        const a1AnswerInput = document.getElementById("a1Answer");
+        const a2AnswerInput = document.getElementById("a2Answer");
+        const a3AnswerInput = document.getElementById("a3Answer");
+        const a4AnswerInput = document.getElementById("a4Answer");
+        const a5AnswerInput = document.getElementById("a5Answer");
+        const a6AnswerInput = document.getElementById("a6Answer");
+        const a7AnswerInput = document.getElementById("a7Answer");
+        const a8AnswerInput = document.getElementById("a8Answer");
+        const a9AnswerInput = document.getElementById("a9Answer");
+        const a10AnswerInput = document.getElementById("a10Answer");
+
+        userOptions.q1 = q1OptionsInput.value.split(",");
+        userOptions.q2 = q2OptionsInput.value.split(",");
+        userOptions.q3 = q3OptionsInput.value.split(",");
+        userOptions.q4 = q4OptionsInput.value.split(",");
+        userOptions.q5 = q5OptionsInput.value.split(",");
+        userOptions.q6 = q6OptionsInput.value.split(",");
+        userOptions.q7 = q7OptionsInput.value.split(",");
+        userOptions.q8 = q8OptionsInput.value.split(",");
+        userOptions.q9 = q9OptionsInput.value.split(",");
+        userOptions.q10 = q10OptionsInput.value.split(",");
+
+        userAnswer.a1 = a1AnswerInput.value.split(",");
+        userAnswer.a2 = a2AnswerInput.value.split(",");
+        userAnswer.a3 = a3AnswerInput.value.split(",");
+        userAnswer.a4 = a4AnswerInput.value.split(",");
+        userAnswer.a5 = a5AnswerInput.value.split(",");
+        userAnswer.a6 = a6AnswerInput.value.split(",");
+        userAnswer.a7 = a7AnswerInput.value.split(",");
+        userAnswer.a8 = a8AnswerInput.value.split(",");
+        userAnswer.a9 = a9AnswerInput.value.split(",");
+        userAnswer.a10 = a10AnswerInput.value.split(",");
+
+        // Update only when the "Save Options" button is clicked
+        quizData.find((q) => q.value === "q1").options = userOptions.q1;
+        quizData.find((q) => q.value === "q2").options = userOptions.q2;
+        quizData.find((q) => q.value === "q3").options = userOptions.q3;
+        quizData.find((q) => q.value === "q4").options = userOptions.q4;
+        quizData.find((q) => q.value === "q5").options = userOptions.q5;
+        quizData.find((q) => q.value === "q6").options = userOptions.q6;
+        quizData.find((q) => q.value === "q7").options = userOptions.q7;
+        quizData.find((q) => q.value === "q8").options = userOptions.q8;
+        quizData.find((q) => q.value === "q9").options = userOptions.q9;
+        quizData.find((q) => q.value === "q10").options = userOptions.q10;
+
+        quizData.find((q) => q.value === "q1").answer = userAnswer.a1;
+        quizData.find((q) => q.value === "q2").answer = userAnswer.a2;
+        quizData.find((q) => q.value === "q3").answer = userAnswer.a3;
+        quizData.find((q) => q.value === "q4").answer = userAnswer.a4;
+        quizData.find((q) => q.value === "q5").answer = userAnswer.a5;
+        quizData.find((q) => q.value === "q6").answer = userAnswer.a6;
+        quizData.find((q) => q.value === "q7").answer = userAnswer.a7;
+        quizData.find((q) => q.value === "q8").answer = userAnswer.a8;
+        quizData.find((q) => q.value === "q9").answer = userAnswer.a9;
+        quizData.find((q) => q.value === "q10").answer = userAnswer.a10;
+
+        // Save userOptions to localStorage
+        localStorage.setItem("userOptions", JSON.stringify(userOptions));
+        localStorage.setItem("userAnswer", JSON.stringify(userAnswer));
+
+        // You can log or display the updated quizData for verification
+        console.log(quizData);
+      }
+
+      function loginScreen() {
+        document.getElementById("details").style.display = "block";
+        document.getElementById("optionsForm").style.display = "none";
+      }
+    </script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh; /* Set body height to 100% of viewport height */
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+      }
+
+      input {
+        font-size: 16px;
+        padding: 0px;
+      }
+
+      /*Style For Options Form*/
+      #optionsForm {
+        width: 1200px;
+        background: #fff;
+        padding: 30px 30px;
+        border-radius: 6px;
+      }
+
+      .login-container {
+        width: 1200px;
+        background: #fff;
+        padding: 30px 30px;
+        border-radius: 6px;
+      }
+
+      .login-container .title {
+        font-size: 40px;
+        font-weight: 500;
+        position: relative;
+      }
+
+      .details {
+        font-size: 30px;
+      }
+
+      .login-container .title::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 30px;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+      }
+
+      .login-container .form .user-details {
+        display: flex; /*Comment the display to display the login form fields align equally*/
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .form .user-details .input-box {
+        margin: 20px 0 12px 0;
+
+        width: calc (100% / 2 - 20px);
+      }
+
+      .user-details .input-box details {
+        display: block;
+        font-weight: 900;
+        margin-bottom: 5px;
+      }
+
+      .user-details .input-box input,
+      select {
+        height: 60px;
+        width: 100%;
+        outline: none;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding-left: 15px;
+        font-size: 25px;
+        border-bottom-width: 2px;
+        transform: all 0.3s ease;
+      }
+
+      button {
+        height: 59px;
+        width: 100%;
+        outline: none;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding-left: 15px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        border-bottom-width: 2px;
+        transform: all 0.3s ease;
+      }
+
+      .user-details .input-box input:focus,
+      .user-details .input-box input:valid,
+      .user-details .input-box select:focus {
+        border-color: #9b59b6;
+      }
+
+      .form .button {
+        height: 45px;
+        margin: 45px 0;
+      }
+
+      .form .button input {
+        height: 60px;
+        width: 100%;
+        outline: none;
+        color: #fff;
+        border: none;
+        font-size: 30px;
+        font-weight: 500;
+        cursor: pointer;
+        border-radius: 5px;
+        letter-spacing: 1px;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+      }
+
+      .form .button input:hover {
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+      }
+
+      @media (max-width: 584px) {
+        /* CHANGE IT TO 100% TO SHOW IT IN SAME LINE*/
+        .login-container {
+          width: 100%;
+        }
+
+        .form .user-details .input-box {
+          margin-bottom: 15px;
+          width: 100%;
+        }
+
+        .login-container form .user-details {
+          max-height: 300px;
+          overflow-y: scroll;
+        }
+
+        .user-details::-webkit-scrollbar {
+          width: 0;
+        }
+      }
+
+      .copy {
+        display: block;
+        align-items: center;
+      }
+      #copy {
+        height: 20px;
+        width: 25px;
+      }
+      .copy label {
+        font-size: larger;
+        color: #b334e6;
+        font-weight: 900;
+      }
+    </style>
+
+    <!--CSS For Test Screen-->
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+
+      body {
+        font-family: "Arial", sans-serif;
+        /*background-color: #f5f5f5;*/
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+      }
+
+      .container {
+        width: 1100px;
+        padding: 100px;
+        margin-top: 0px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+      }
+
+      .quiz-container {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 100%;
+        margin: 0px;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 50px;
+      }
+
+      .question {
+        text-align: center;
+        font-size: 30px;
+        padding: 0px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .options {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 10px;
+      }
+
+      .option {
+        height: 60px;
+        width: 350px;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        align-content: center;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .option:hover {
+        background-color: #f0f0f0;
+      }
+
+      .option img {
+        display: block;
+        width: 2px;
+        height: 50px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
+      .result-container {
+        text-align: center;
+        padding: 20px;
+      }
+
+      .result-container p {
+        margin: 10px 0;
+      }
+
+      button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #428bca;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        margin-right: 10px;
+      }
+
+      .button:hover {
+        background-color: #3e0dee;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      #l1,
+      #l2,
+      #l3,
+      #l4,
+      #l5,
+      #l6,
+      #uniqueID {
+        width: 500px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- dIV FOR OPTIONS FORM-->
+    <div id="optionsForm" style="display: none">
+      <div class="form">
+        <div class="user-details">
+          <div class="input-box">
+            <h1 id="h" style="font-size: 35px;">Details of Q&A</h1>
+            <p style="font-size: 25px;">
+              <b><u>Mandatory Steps to be Followed :</b></u><br> 1. Comma Seperates the Options. <br />
+              2. Enter Four Options for each question and One Correct Answer.
+              <br />
+              3. There should be no space, before and after comma. <br />
+              4. After Entering the Options and Correct Answer Click "Save Q&A" Button for
+              10 times, so that given 10 options will be saved. <br />
+              5. Wait for 10 minutes after clicking "Save New Q&A" and then click "Login". <br> <br>
+              <b>Example:</b> <br /> <br>
+            </p>
+            <label style="font-size: 20px;"><b>Example - Options for Q1</b> </label>
+            <input type="text" value="Head Damage,Head Burr,Thread Damage,Shank Damage" readonly />
+
+            <label style="font-size: 20px;"><b>Example - Answer for Q1 :</b> </label>
+            <input type="text" value="Thread Damage" readonly /><br /><br />
+            <hr><hr>
+          </div>
+          <div class="input-box">
+            <label for="q1Options" style="font-size: 23px; color: brown;"><b>Options for Q1</b> </label>
+            <input type="text" id="q1Options" name="q1Options" />
+
+            <label for="a1Answer" style="font-size: 23px; color: #3e0dee;"><b>Answer for Q1 :</b> </label>
+            <input type="text" id="a1Answer" name="a1Answer" />
+            <br />
+
+            <label for="q2Options" style="font-size: 23px; color: brown;"><b>Options for Q2</b> </label>
+            <input type="text" id="q2Options" name="q2Options" />
+
+            <label for="a2Answer" style="font-size: 23px; color: #3e0dee;"><b>Answer for Q2 :</b> </label>
+            <input type="text" id="a2Answer" name="a2Answer" />
+            <br />
+            <label for="q3Options" style="font-size: 23px; color: brown;"><b>Options for Q3</b> </label>
+            <input type="text" id="q3Options" name="q3Options" />
+
+            <label for="a3Answer" style="font-size: 23px; color: #3e0dee;"><b>Answer for Q3 :</b> </label>
+            <input type="text" id="a3Answer" name="a3Answer" />
+            <br />
+            <label for="q4Options" style="font-size: 23px; color: brown;"><b>Options for Q4</b> </label>
+            <input type="text" id="q4Options" name="q4Options" />
+
+            <label for="a4Answer" style="font-size: 23px; color: #3e0dee;"><b>Answer for Q4 :</b> </label>
+            <input type="text" id="a4Answer" name="a4Answer" />
+            <br />
+            <label for="q5Options" style="font-size: 23px; color: brown;"><b>Options for Q5</b> </label>
+            <input type="text" id="q5Options" name="q5Options" />
+
+            <label for="a5Answer" style="font-size: 23px; color: #3e0dee;"><b>Answer for Q5 : </b></label>
+            <input type="text" id="a5Answer" name="a5Answer" />
+            <br />
+            <label for="q6Options" style="font-size: 23px; color: brown;"><b>Options for Q6</b> </label>
+            <input type="text" id="q6Options" name="q6Options" />
+
+            <label for="a6Answer" style="font-size: 23px; color: #3e0dee;"><b>Answer for Q6 :</b> </label>
+            <input type="text" id="a6Answer" name="a6Answer" />
+            <br />
+            <label for="q7Options" style="font-size: 23px; color: brown;"><b>Options for Q7 </b></label>
+            <input type="text" id="q7Options" name="q7Options" />
+
+            <label for="a7Answer" style="font-size: 23px; color: #3e0dee;"><b>Answer for Q7 :</b> </label>
+            <input type="text" id="a7Answer" name="a7Answer" />
+            <br />
+            <label for="q8Options" style="font-size: 23px; color: brown;"><b>Options for Q8</b> </label>
+            <input type="text" id="q8Options" name="q8Options" />
+
+            <label for="a8Answer" style="font-size: 23px; color: #3e0dee;"><b>Answer for Q8 : </b></label>
+            <input type="text" id="a8Answer" name="a8Answer" />
+            <br />
+            <label for="q9Options" style="font-size: 23px; color: brown;"><b>Options for Q9 </b></label>
+            <input type="text" id="q9Options" name="q9Options" />
+
+            <label for="a9Answer" style="font-size: 23px; color: #3e0dee;"><b>Answer for Q9 : </b></label>
+            <input type="text" id="a9Answer" name="a9Answer" />
+            <br />
+            <label for="q10Options" style="font-size: 23px; color: brown;"><b>Options for Q10 </b></label>
+            <input type="text" id="q10Options" name="q10Options" />
+
+            <label for="a10Answer" style="font-size: 23px; color: #3e0dee;"><b>Answer for Q10 :</b> </label>
+            <input type="text" id="a10Answer" name="a10Answer" />
+            <br /><br />
+            <button onclick="saveOptions()" style="font-size: 23px; padding-bottom: 60px;">Save New Q&A <br> (Click 10 times to save individual options)</button><br /><br />
+            <button onclick="loginScreen()" style="font-size: 23px;">Login Screen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+
+    <div class="login-container" id="details">
+      <div class="title" id="user-details">
+        <img
+          src="LoginImg-Dont-Open/sfl.jpg"
+          alt="SFL Logo"
+          style="height: 100px; border-radius: 10px"
+        />
+        <span style="color: darkgray; font-size: 35px"
+          >Sundram Fasteners Limited
+        </span>
+        <br />
+        <span style="font-size: 38px">Login Form for Training Assessment</span>
+        <hr />
+        <div class="form">
+          <div class="user-details">
+            <div class="input-box">
+              <span class="details">Enter Operator Name</span><br />
+              <input
+                type="text"
+                name="data[Operator Name]"
+                placeholder="Operator Name"
+                id="l1"
+                required
+              />
+            </div>
+            <div class="input-box">
+              <span class="details">Enter Operator ID</span><br />
+              <input
+                type="text"
+                name="data[Operator ID]"
+                placeholder="Operator ID"
+                id="l2"
+                autocomplete="off"
+                required
+              />
+            </div>
+            <div class="input-box">
+              <span class="details">Select Date</span><br />
+              <input
+                type="date"
+                name="data[Date]"
+                placeholder="Date"
+                id="l3"
+                required
+              />
+            </div>
+            
+            <div class="input-box">
+              <span class="details">Select Shift</span><br />
+              <select name="data[Shift]" id="l4" style="cursor: pointer">
+                <option value="NA">NA</option>
+                <option value="Shift-I">Shift I</option>
+                <option value="Shift-II">Shift II</option>
+                <option value="Shift-III">Shift III</option>
+              </select>
+            </div>
+            <div class="input-box">
+              <span class="details">Select Supervisor</span><br />
+              <select name="data[Supervisor]" id="l5" style="cursor: pointer">
+                <option value="Alagu Ganapathy R">Alagu Ganapathy R</option>
+                <option value="Esakki Muthu K">Esakki Muthu K</option>
+                <option value="Gokulnath K">Gokulnath K</option>
+                <option value="Pranesh G">Pranesh G</option>
+              </select>
+            </div>
+              <br />
+              <div class="input-box">
+                <span class="details">Unique ID</span><br />
+                <input type="text" name="data[UniqueID]" id="uniqueID" readonly />
+              </div>
+              <div class="input-box">
+                <span class="details">Select Plant</span><br />
+                <select name="data[Plant]" id="l6" style="cursor: pointer">
+                  <option value="Padi HEX">Padi HEX</option>
+                  <option value="Padi HNF">Padi HNF</option>
+                  <option value="KPM">KPM</option>
+                  <option value="Pondy HEX">Pondy HEX</option>
+                  <option value="WEF">WEF</option>
+                </select>
+              </div>
+          </div>
+          <div class="button">
+            <input type="submit" onclick="testshow()" value="Login" />
+            
+          </div>
+          <div class="button">
+            <input
+              type="button"
+              onclick="optionShow()"
+              value="New Q&A"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function optionShow() {
+        document.getElementById("optionsForm").style.display = "block";
+        document.getElementById("details").style.display = "none";
+      }
+      //Function for getting input values in Upper Case
+      const inputField = document.getElementById("l1");
+      const inputField1 = document.getElementById("l2");
+
+      inputField.addEventListener("keyup", function (event) {
+        event.preventDefault();
+        inputField.value = inputField.value.toUpperCase();
+      });
+
+      inputField1.addEventListener("keyup", function (event) {
+        event.preventDefault();
+        inputField1.value = inputField1.value.toUpperCase();
+      });
+    </script>
+
+    <script>
+      //Function for validating loginscreen to test questions
+      function testshow() {
+        const name = document.getElementById("l1").value;
+        const id = document.getElementById("l2").value;
+        const date = document.getElementById("l3").value;
+        const shift = document.getElementById("l4").value;
+        const supervisor = document.getElementById("l5").value;
+        const plant = document.getElementById("l6").value;
+        const uniqueID = document.getElementById("uniqueID").value;
+
+        if (
+          name == "" ||
+          id == "" ||
+          date == "" ||
+          shift == "" ||
+          supervisor == "" ||
+          plant == "" ||
+          uniqueID == ""
+        ) {
+          alert("Enter All The Details");
+        } else if (
+          name != "" ||
+          id != "" ||
+          date != "" ||
+          shift != "" ||
+          supervisor != "" ||
+          plant != "" ||
+          uniqueID != ""
+        ) {
+          document.getElementById("show").style.display = "inline-block";
+          document.getElementById("details").style.display = "none";
+        }
+      }
+
+      /*function testshow() {
+        document.getElementById("show").style.display = "inline-block";
+        document.getElementById("details").style.display = "none";
+      }*/
+
+      /* Generate a unique ID function
+      function generateUniqueID() {
+        const timestamp = new Date().getTime();
+        const randomNum = Math.floor(Math.random() * 1000);
+        return `ID_${timestamp}_${randomNum}`;
+      }*/
+
+      function generateUniqueID() {
+        // Get the values of the two inputs
+        var input1 = document.getElementById("l2");
+        var input2 = document.getElementById("uniqueID");
+
+        // Update the second input's value whenever the first input's value is changed
+        input1.addEventListener("input", function () {
+          // Filter out any non-numeric characters from the first input's value
+          var numbers = input1.value.replace(/[^0-9]/g, "");
+
+          // Set the second input's value to the filtered numbers
+          input2.value = numbers;
+        });
+      }
+
+      // Set the generated unique ID to the text box
+      const uniqueIDTextBox = document.getElementById("uniqueID");
+      uniqueIDTextBox.value = generateUniqueID();
+
+      // Add click event to the copy button
+      //const copyButton = document.getElementById("copyButton");
+      //copyButton.addEventListener("click", function () {
+      // Select the text in the text box
+      //uniqueIDTextBox.select();
+      //uniqueIDTextBox.setSelectionRange(0, 99999); // For mobile devices
+
+      // Copy the selected text to the clipboard
+      // document.execCommand("copy");
+
+      // Deselect the text
+      //window.getSelection().removeAllRanges();
+
+      // Optionally, provide some visual feedback to the user
+      //alert("Unique ID copied to clipboard!");
+      //});
+
+      // Disable the back button
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+        history.go(1);
+      };
+    </script>
+
+    <!--Html For Test-->
+
+    <div class="container" id="show" style="display: none">
+      <h1 id="h">Assessment</h1>
+      <div class="quiz-container" id="quiz"></div>
+      <div id="values"></div>
+      <div id="result" class="result-container"></div>
+      <button id="submit" class="button" style="font-size: 25px">
+        Next Question
+      </button>
+      <!--<button id="printButton" class="button hide">Save As PDF</button-->
+      <br /><br />
+      <button id="showAnswer" class="button hide" style="font-size: 25px">
+        Show Answer</button
+      ><br /><br />
+      <button id="retry" class="button hide" style="font-size: 25px">
+        Retry</button
+      ><br /><br />
+    </div>
+
+    <!--Script for Questions-->
+    <!--<script src="assessmentQuestions.js"></script>-->
+
+    <!--Script for Test-->
+    <script>
+      const quizContainer = document.getElementById("quiz");
+      const resultContainer = document.getElementById("result");
+      const submitButton = document.getElementById("submit");
+      const retryButton = document.getElementById("retry");
+      //const printButton = document.getElementById("printButton");
+      const showAnswerButton = document.getElementById("showAnswer");
+      const htag = document.getElementById("h");
+
+      let currentQuestion = 0;
+      let score = 0;
+      let incorrectAnswers = [];
+
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+
+      shuffleArray(quizData);
+
+      function displayQuestion() {
+        const questionNumber = currentQuestion + 1;
+        const questionData = quizData[currentQuestion];
+
+        const questionElement = document.createElement("div");
+        questionElement.className = "question ";
+        questionElement.innerHTML = `<p style="font-size: 29px" > ${questionNumber} - Select the defect for the given photo <br> ${questionNumber} - दिए गए चित्र मे दोष का चयन करें <br> ${questionData.question}   </p>`;
+
+        const optionsElement = document.createElement("div");
+        optionsElement.className = "options";
+        optionsElement.style.display = "flex";
+        optionsElement.style.flexWrap = "wrap";
+        optionsElement.style.justifyContent = "space-between";
+        optionsElement.style.fontSize = "25px";
+
+        const shuffledOptions = [...questionData.options];
+        shuffleArray(shuffledOptions);
+
+        for (let i = 0; i < shuffledOptions.length; i++) {
+          const option = document.createElement("label");
+          option.className = "option";
+
+          const radio = document.createElement("input");
+          radio.type = "radio";
+          radio.name = "quiz";
+          radio.value = shuffledOptions[i];
+          radio.style.height = "20px";
+          radio.style.width = "20px";
+          radio.style.display = "inline-block";
+
+          const optionText = document.createTextNode(shuffledOptions[i]);
+          option.appendChild(radio);
+          option.appendChild(optionText);
+          optionsElement.appendChild(option);
+        }
+
+        quizContainer.innerHTML = "";
+        quizContainer.appendChild(questionElement);
+        quizContainer.appendChild(optionsElement);
+      }
+
+      function checkAnswer() {
+        const selectedOption = document.querySelector(
+          'input[name="quiz"]:checked'
+        );
+        if (selectedOption.value) {
+          const answer = selectedOption.value;
+          if (answer === quizData[currentQuestion].answer[0]) {
+            score++;
+          } else {
+            incorrectAnswers.push({
+              question: quizData[currentQuestion].question,
+              questionImg: quizData[currentQuestion].questionImg,
+              value: quizData[currentQuestion].value,
+              incorrectAnswer: answer,
+              correctAnswer: quizData[currentQuestion].answer,
+            });
+          }
+          currentQuestion++;
+          selectedOption.checked = false;
+          if (currentQuestion < quizData.length) {
+            displayQuestion();
+          } else {
+            displayResult();
+          }
+        }
+      }
+      // Function For Displaying Result
+      function displayResult() {
+        let remark = null;
+        let remarkColor = null;
+        const playerGrade = (score / 10) * 100;
+        if (playerGrade >= 0 && playerGrade <= 70) {
+          remark = "Very poor score, Take immediate training & Try again !!!";
+          remarkColor = "red";
+        } else if (playerGrade >= 71 && playerGrade <= 99) {
+          remark = "Very good, Almost there, Keep practising !!!";
+          remarkColor = "blue";
+        } else if (playerGrade == 100) {
+          remark = "That's great, looks like you're ready for the Job !!!";
+          remarkColor = "green";
+        } // For Pass and Fail
+        let passFail = null;
+        /*if(playerGrade >= 0 && playerGrade <= 99) {
+          passFail = "Fail";
+          passFailColor = "red";
+        } else if(playerGrade == 100) {
+          passFail = "Pass";
+          passFailColor = "green";
+        }*/
+
+        quizContainer.style.display = "none";
+        submitButton.style.display = "none";
+        //printButton.style.display = "none";
+        showAnswerButton.style.display = "inline-block";
+        retryButton.style.display = "inline-block";
+        htag.innerHTML = "Assessment Completed";
+
+        resultContainer.innerHTML = `
+        <p style="font-size: 30px">You scored ${score} out of ${quizData.length} </p><br>
+        <p style="font-size: 30px">Your Grade: ${playerGrade} % </p><br><br>
+        <p style="color: ${remarkColor}; font-size: 30px;">${remark}</p><br>
+
+        `;
+      }
+
+      function retryQuiz() {
+        currentQuestion = 0;
+        score = 0;
+        incorrectAnswers = [];
+        quizContainer.style.display = "block";
+        submitButton.style.display = "inline-block";
+        retryButton.style.display = "none";
+        //printButton.style.display = "none";
+        showAnswerButton.style.display = "none";
+        htag.innerHTML = "Assessment";
+
+        resultContainer.innerHTML = "";
+        displayQuestion();
+        //window.location.href = "login.html";
+      }
+
+      // Function for storing data in SheetDB
+      function sendToSheetDB(data) {
+        const sheetDBUrl = "https://sheetdb.io/api/v1/tyq4ds8cp5o4d"; // Replace with required connectors SheetDB API endpoint
+
+        fetch(sheetDBUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            console.log("Data sent to SheetDB:", result);
+          })
+          .catch((error) => {
+            console.error("Error sending data to SheetDB:", error);
+          });
+      }
+
+      // Function for storing data in the Spread Sheet
+      function showAnswer() {
+        const name = document.getElementById("l1").value;
+        const id = document.getElementById("l2").value;
+        const date = document.getElementById("l3").value;
+        const shift = document.getElementById("l4").value;
+        const supervisor = document.getElementById("l5").value;
+        const plant = document.getElementById("l6").value;
+        const uniqueID = document.getElementById("uniqueID").value;
+
+        quizContainer.style.display = "none";
+        submitButton.style.display = "none";
+        //printButton.style.display = "inline-block";
+        retryButton.style.display = "none";
+        showAnswerButton.style.display = "none";
+        htag.innerHTML = "Assessment Completed";
+
+        let incorrectAnswersHtml = "";
+        for (let i = 0; i < incorrectAnswers.length; i++) {
+          incorrectAnswersHtml += `
+        <div class="answer-container">
+
+          ${incorrectAnswers[i].question} <br>
+
+          <label style="display: none">Question:</label>
+          <input type="text" style="display: none" name="data[question${
+            i + 1
+          }]" value="${incorrectAnswers[i].value}" readonly />
+
+
+          <label style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;"><b>Your Answer:</b></label>
+          <input type="text" style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          font-size: 15x;
+          font-color: blue;
+          font-weight: 600;
+          color: red;
+          transition: background-color 0.3s ease;" name="data[incorrectAnswer${
+            i + 1
+          }]" value="${incorrectAnswers[i].incorrectAnswer}" readonly /> 
+  
+          <label style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;"><b>Correct Answer:</b></label>
+          <input type="text" style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          font-size: 15px;
+          font-weight: 600;
+          color: green;
+          transition: background-color 0.3s ease;" name="data[correctAnswer${
+            i + 1
+          }]" value="${incorrectAnswers[i].correctAnswer}" readonly />
+        </div>
+        `;
+        }
+
+        resultContainer.innerHTML = `
+      <form id="answerForm" action="https://sheetdb.io/api/v1/tyq4ds8cp5o4d">
+        
+        <div class="answer-container" style="margin: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        ">
+        <label style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" ><b>Operator Name:</b></label>
+        <input style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" type="text" name="data[Operator Name]" value="${name}" readonly /> <br>
+        <label style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" ><b>Operator ID:</b></label>
+        <input style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" type="text" name="data[Operator ID]" value="${id}" readonly /> <br>
+        <label style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" ><b>Date:</b></label>
+        <input style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" type="text" name="data[Date]" value="${date}" readonly /> <br>
+        <label style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" ><b>Shift:</b></label>
+        <input style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" type="text" name="data[Shift]" value="${shift}" readonly /> <br>
+        <label style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" ><b>Supervisor:</b></label>
+        <input style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" type="text" name="data[Supervisor]" value="${supervisor}" readonly /> <br>
+        <label style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" ><b>Plant:</b></label>
+        <input style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" type="text" name="data[Plant]" value="${plant}" readonly /> <br>
+        <label style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" ><b>Unique ID:</b></label>
+        <input style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" type="text" name="data[Unique ID]" value="${uniqueID}" readonly /> <br>
+        <label style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" ><b>Score:</b></label>
+        <input style="margin: 10px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;" type="text" name="data[Score]" value="${score}/${quizData.length}" readonly /> <br>
+        
+      
+        <p style="font-size:20px;"><b>Summary of Incorrect Answers:</b></p>
+        ${incorrectAnswersHtml}
+        
+        <input type="submit" value="Save" style="margin: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        color: #fff;
+        background-color: #428bca;
+        font-size: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;">
+      </div>
+      </form>
+    `;
+
+        // Add event listener to the form for submitting answers
+        var answerForm = document.getElementById("answerForm");
+        answerForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          fetch(answerForm.action, {
+            method: "POST",
+            body: new FormData(document.getElementById("answerForm")),
+          })
+            .then((response) => response.json())
+            .then((html) => {
+              // Reset all the values
+              answerForm.reset();
+              window.print();
+              window.location.href = "index.html";
+            });
+          // Handle the form submission, e.g., send data to a server or process it further
+          alert("Form submitted!");
+        });
+      }
+
+      //printButton.addEventListener("click", function () {
+      //window.print();
+      //});
+
+      submitButton.addEventListener("click", checkAnswer);
+      retryButton.addEventListener("click", retryQuiz);
+      showAnswerButton.addEventListener("click", showAnswer);
+
+      displayQuestion();
+    </script>
+  </body>
+</html>
